@@ -1,0 +1,76 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.2.RELEASE'
+        springCloudVersion = 'Camden.SR6'
+    }
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        maven { url "http://repo.spring.io/libs-release" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+group 'poc.amazons3'
+version '1.0-SNAPSHOT'
+description 'poc-amazonS3s'
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+jar {
+    baseName = 'poc-amazons3'
+    version = '1.0-SNAPSHOT'
+}
+
+
+springBoot {
+    mainClass = 'poc.amazons3.Application'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    maven { url "http://repo.spring.io/libs-release" }
+}
+
+ext {
+    springBootVersion = '1.5.2.RELEASE'
+    springCloudVersion = 'Camden.SR6'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Camden.SR6"
+    }
+}
+
+dependencies {
+    compile group: 'commons-validator', name: 'commons-validator', version: '1.5.1'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
+
+    compile(group: 'org.springframework.boot', name: 'spring-boot-starter-aop')
+    compile(group: 'org.springframework.boot', name: 'spring-boot-starter-web') {
+        exclude module: 'spring-boot-starter-tomcat'
+    }
+
+    compile(group: 'org.springframework.boot', name: 'spring-boot-starter-cache')
+
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-jetty'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security'
+    compile("org.springframework.cloud:spring-cloud-aws-context:${springCloudVersion}")
+
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.16.8'
+
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+}
