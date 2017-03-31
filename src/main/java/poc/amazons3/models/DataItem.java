@@ -10,10 +10,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by 310280812 on 3/30/2017.
@@ -42,4 +44,11 @@ public class DataItem implements Serializable {
     @NotNull
     @Min(0) @Max(100)
     private Integer amount;
+
+    @Transient
+    private Object data;
+
+    private Date createdAt = new Date();
+
+    private String username;
 }

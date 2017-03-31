@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by 310280812 on 3/30/2017.
@@ -37,4 +38,8 @@ public class DataItemBlob implements Serializable {
 
     @NotNull
     private byte[] data;
+
+    private Date createdAt = new Date();
+
+    private String username;
 }

@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableAutoConfiguration
 @EntityScan(basePackages = {"poc.amazons3"})
-@EnableJpaRepositories(basePackages = {"poc.amazons3"})
+@EnableJpaRepositories(basePackages = {"poc.amazons3.repositories"})
 @EnableTransactionManagement
 public class JpaConfig {
 }
