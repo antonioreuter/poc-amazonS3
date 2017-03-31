@@ -15,7 +15,7 @@ public class DataItemBlobService {
     private DataItemBlobRepository dataItemBlobRepository;
 
     public Long save(DataItemBlob dataItemBlob) {
-        return dataItemBlobRepository.save(dataItemBlob);
+        return dataItemBlobRepository.save(dataItemBlob).getId();
     }
 
     public DataItemBlob findById(Long id) {

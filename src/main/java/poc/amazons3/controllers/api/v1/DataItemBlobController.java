@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import poc.amazons3.models.DataItemBlob;
-import poc.amazons3.repositories.DataItemBlobRepository;
+import poc.amazons3.services.DataItemBlobService;
 
 /**
  * Created by 310280812 on 3/30/2017.
@@ -18,17 +18,17 @@ import poc.amazons3.repositories.DataItemBlobRepository;
 public class DataItemBlobController {
 
     @Autowired
-    private DataItemBlobRepository dataItemBlobRepository;
+    private DataItemBlobService dataItemBlobService;
 
 
     @RequestMapping(method = RequestMethod.POST)
     public Long save(@RequestBody DataItemBlob dataItemBlob) {
-        return dataItemBlobRepository.save(dataItemBlob);
+        return dataItemBlobService.save(dataItemBlob);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public DataItemBlob findById(@PathVariable("id") Long id) {
-        return dataItemBlobRepository.findById(id);
+        return dataItemBlobService.findById(id);
     }
 
 }

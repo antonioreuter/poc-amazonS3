@@ -1,0 +1,72 @@
+server:
+  port: 9090
+  session:
+    timeout: 60
+
+info:
+  app:
+    name: Poc Amazon S3
+    description: Poc to validate the Amazon S3
+    version: 1.0.0
+
+api:
+  username: services
+  password: 123456
+
+spring:
+  profiles:
+    active: south-america
+  http:
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: true
+    converters:
+      preferred-json-mapper: jackson
+  jackson:
+    time-zone: America/Sao_Paulo
+  datasource:
+    url: jdbc:mysql://localhost:3306/amazons3
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    database: mysql
+
+management:
+  health:
+    db:
+      enabled: true
+    defaults:
+      enabled: true
+    status:
+      order: DOWN, OUT_OF_SERVICE, UNKNOWN, UP
+
+---
+spring:
+  profiles: south-america
+  jpa:
+    show-sql: true
+
+---
+spring:
+  profiles:
+
+
+
+
+---
+spring:
+  profiles: south-america
+server:
+  port: 9091
+
+---
+spring:
+  profiles: us-west
+
+server:
+  port: 9092
