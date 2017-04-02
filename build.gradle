@@ -57,7 +57,7 @@ dependencyManagement {
 }
 
 dependencies {
-    compile group: 'org.reflections', name: 'reflections', version: '0.9.10'
+    compile group: 'org.reflections', name: 'reflections', version: '0.9.11'
 
     compile group: 'commons-validator', name: 'commons-validator', version: '1.5.1'
     compile group: 'commons-lang', name: 'commons-lang', version: '2.6'

@@ -7,9 +7,13 @@ import org.reflections.Reflections;
 import org.reflections.scanners.MethodAnnotationsScanner;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,16 +23,24 @@ import java.util.Set;
  * Created by antonioreuter on 02/04/17.
  */
 @Slf4j
+@Component
 public class CacheExpiresConfiguration {
-  public static void configureTtlWithReflection(RedisCacheManager redisCacheManager, Long defaultExpires) {
+
+  @Autowired
+  private RedisCacheManager redisCacheManager;
+
+  @Value("${redis.defaultExpires:300}")
+  private Long defaultExpires;
+
+  @PostConstruct
+  public void init() {
     Set<Method> annotatedMethods = retriveAnnotatedMethods("poc.amazons3", CacheExpires.class);
     Map<String, Long> map = defineCacheTtl(annotatedMethods, defaultExpires);
 
     redisCacheManager.setExpires(map);
   }
 
-  @SuppressWarnings({"rawtypes", "unchecked"})
-  private static Set<Method> retriveAnnotatedMethods(String packageUrl, Class annotatedClass) {
+  private Set<Method> retriveAnnotatedMethods(String packageUrl, Class annotatedClass) {
     Reflections reflections = new Reflections(new ConfigurationBuilder()
         .setUrls(ClasspathHelper.forPackage(packageUrl))
         .setScanners(new MethodAnnotationsScanner()));
@@ -38,7 +50,7 @@ public class CacheExpiresConfiguration {
     return annotatedMethods;
   }
 
-  private static Map<String, Long> defineCacheTtl(Set<Method> annotatedMethods, Long defaultExpires) {
+  private Map<String, Long> defineCacheTtl(Set<Method> annotatedMethods, Long defaultExpires) {
     Map<String, Long> map = new HashMap<String, Long>();
 
     if (CollectionUtils.isNotEmpty(annotatedMethods)) {
