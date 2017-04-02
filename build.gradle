@@ -57,9 +57,14 @@ dependencyManagement {
 }
 
 dependencies {
+    compile group: 'org.reflections', name: 'reflections', version: '0.9.10'
+
     compile group: 'commons-validator', name: 'commons-validator', version: '1.5.1'
+    compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
+    compile group: 'redis.clients', name: 'jedis', version: '2.9.0'
     compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
 
+    compile "org.springframework.data:spring-data-redis:1.8.1.RELEASE"
     compile(group: 'org.springframework.boot', name: 'spring-boot-starter-aop')
     compile(group: 'org.springframework.boot', name: 'spring-boot-starter-web') {
         exclude module: 'spring-boot-starter-tomcat'
@@ -74,8 +79,8 @@ dependencies {
 
     compile group: 'org.springframework.cloud', name: 'spring-cloud-aws-context'
 
-
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.16.8'
 
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
 }
+

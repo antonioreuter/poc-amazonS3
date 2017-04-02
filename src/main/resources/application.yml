@@ -13,6 +13,15 @@ api:
   username: services
   password: 123456
 
+redis:
+  host: 127.0.0.1
+  port: 6379
+  database: 0
+  defaultExpires: 60
+  pool:
+    maxConn: 30
+    maxIdle: 10
+
 spring:
   profiles:
     active: south-america
@@ -26,9 +35,8 @@ spring:
   jackson:
     time-zone: America/Sao_Paulo
   datasource:
-    url: jdbc:mysql://localhost:3306/amazons3
+    url: jdbc:mysql://localhost:3306/amazons3?useLegacyDatetimeCode=false&serverTimezone=UTC
     username: root
-    password: 123456
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     hibernate:
