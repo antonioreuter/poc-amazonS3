@@ -46,6 +46,11 @@ spring:
     database: mysql
 
 management:
+  security:
+    enabled: false
+  info:
+    git:
+      mode: full
   health:
     db:
       enabled: true
@@ -53,7 +58,16 @@ management:
       enabled: true
     status:
       order: DOWN, OUT_OF_SERVICE, UNKNOWN, UP
+    diskspace:
+      enabled: true
+    redis:
+      enabled: true
 
+endpoints:
+  docs:
+    enabled: true
+  health:
+    sensitive: false
 ---
 spring:
   profiles: south-america
