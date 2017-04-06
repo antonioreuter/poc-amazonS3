@@ -7,11 +7,10 @@ import org.springframework.stereotype.Component;
 /**
  * Created by 310280812 on 4/5/2017.
  */
-
-@Component("custom1")
-public class CustomHealthIndicator implements HealthIndicator {
+@Component("scondCustom")
+public class SecondCustomHealthIndicator implements HealthIndicator {
     @Override
     public Health health() {
-        return Health.up().withDetail("Details:", "Testing the custom health indicator!").build();
+        return Health.up().withDetail("Details:", "Testing the second custom health indicator!").build();
     }
 }
